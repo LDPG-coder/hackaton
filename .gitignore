@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment & Secrets (NEVER commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*-keypair.json
+id.json
+.venpay/
+
+# Next.js / Build outputs
+.next/
+out/
+dist/
+build/
+.vercel/
+*.tsbuildinfo
+
+# Rust / Anchor
+target/
+test-ledger/
+.anchor/
+
+# Logs & OS
+*.log
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db
