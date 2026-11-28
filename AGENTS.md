@@ -2,11 +2,13 @@
 
 Fast-cycle engineering guardrails for **Ven&Pay** (Dev3Pack Global Hackathon). Applies to **Antigravity**, **OpenCode**, and all contributors working in this repository.
 
-## 1. Environment Constraints (`FCMICROS-22` Non-Admin Windows)
-- **No Admin / No WSL2 / No Docker:** Never suggest or run admin installers, `.msi` packages, `wsl --install`, or Docker commands. Use `scoop`, `pnpm`, and `uv` strictly in user-space.
-- **Rust / Solana Builds:** Compile and deploy `programs/venpay` via **Solana Playground (`beta.solpg.io`)** or **GitHub Codespaces**; keep the exact `lib.rs` source and exported `IDL` JSON committed in this repository.
+## 1. Dual-OS Environment & Portability (macOS Dev + Windows `FCMICROS-22` Parity)
+- **macOS (`arm64` Dev Machine):** Native `git`, `node 22`, `pnpm 10`, `opencode`, and `docker` are available. Always quote local workspace paths containing special characters (e.g., `"/Users/Porto/Desktop/Ven&pay"`).
+- **Windows (`FCMICROS-22` Non-Admin Hackathon Machine):** No Admin, no WSL2, no Docker, `LongPathsEnabled=0`, Windows Firewall UAC prompts on `0.0.0.0`, shared PC with `VeyonService`. Use user-space tooling only (`scoop`, `pnpm`, `uv`, `curl.exe`).
+- **Rust / Solana Builds:** Compile and deploy `programs/venpay` via **Solana Playground (`beta.solpg.io`)** (or GitHub Codespaces); keep the exact `programs/venpay/src/lib.rs` source and exported `packages/shared/idl/venpay.json` committed in this repository so neither macOS nor Windows requires a local Rust/Anchor toolchain.
 - **Local Dev Servers:** Always bind to **`127.0.0.1` / `localhost`** (never `0.0.0.0`) to avoid Windows Firewall UAC prompts.
-- **Short Paths & No Symlinks:** Keep paths concise (`C:\Users\FCMICROS-22\dev\hackaton`), avoid creating NTFS symlinks, and use `curl.exe` instead of PowerShell's `curl` alias.
+- **Cross-Platform Scripts & Paths:** All `package.json` scripts MUST use Node/`pnpm`/`tsx` (never bash-only or PowerShell-only shell syntax). Keep paths concise, avoid creating symlinks (NTFS compatibility), enforce `LF` line endings via `.gitattributes`, and NEVER hardcode OS-specific absolute paths (`C:\Users\...` or `/Users/...`) in `plugins/` manifests or committed config files.
+- **Handoff Hygiene:** Keep `.env.example` up to date with every required variable for zero-friction OS switching (`git pull` + copy `.env.local` + `pnpm install`), and run `gh auth logout` on shared Windows PCs after the hackathon.
 
 ## 2. Security & Shared-PC Hygiene (NON-NEGOTIABLE)
 - **NEVER commit secrets:** Never commit `.env`, `.env.local`, API keys (Firecrawl, ElevenLabs, Supabase service role, Pollar secret, Gemini/OpenAI), or Solana keypair JSON files. Verify `git status` and `.gitignore` before every push.

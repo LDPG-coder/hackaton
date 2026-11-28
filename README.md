@@ -95,7 +95,7 @@ hackaton/
 
 ## Quickstart (Local Development)
 
-> Prerequisites: Node.js 20+ (LTS), `pnpm`, Git. (On Windows non-admin machines, bind dev servers to `127.0.0.1`).
+> Prerequisites: Node.js 20+ (LTS), `pnpm`, Git (macOS & Windows non-admin compatible; always bind dev servers to `127.0.0.1`).
 
 ```bash
 # 1. Clone repository
